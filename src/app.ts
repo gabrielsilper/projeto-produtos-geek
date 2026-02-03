@@ -33,6 +33,7 @@ export default class App {
     this.server.get('/api/v1/live', (req, res) => {
       res.send('Mundo Geek v1 is live!');
     });
+  
   }
 
   private errorHandling(): void {
