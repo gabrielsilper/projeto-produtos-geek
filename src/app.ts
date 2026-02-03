@@ -3,6 +3,7 @@ import { DataSource } from 'typeorm';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import { appDataSource } from './database/data-source';
+import indexRouter from 'routes/index.routes';
 
 export default class App {
   public readonly server: express.Express;
@@ -33,11 +34,10 @@ export default class App {
     this.server.get('/api/v1/live', (req, res) => {
       res.send('Mundo Geek v1 is live!');
     });
-  
+    this.server.use('/api/v1', indexRouter);
   }
 
-  private errorHandling(): void {
-  }
+  private errorHandling(): void {}
 
   public start(PORT: string | number): void {
     this.db
