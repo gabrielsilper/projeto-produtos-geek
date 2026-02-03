@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import { appDataSource } from './database/data-source';
 import indexRouter from 'routes/index.routes';
+import { errorHandler } from 'middlewares/error-handler';
 
 export default class App {
   public readonly server: express.Express;
@@ -37,7 +38,9 @@ export default class App {
     this.server.use('/api/v1', indexRouter);
   }
 
-  private errorHandling(): void {}
+  private errorHandling(): void {
+    this.server.use(errorHandler)
+  }
 
   public start(PORT: string | number): void {
     this.db
